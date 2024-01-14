@@ -1,0 +1,21 @@
+@startuml FilesearchC3
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+Person_Ext(cliente, "Cliente", "Quiere buscar una partida")
+System_Boundary(sistema, "Sistema líder-trabajador") {
+    Container_Boundary(nodo1, "Líder") {
+        Component(partida, "Partida1", "GenServer", "Publica la partida disponible al cliente y redirige peticiones a sus trabajadores a los que gestiona")
+    }
+    Container_Boundary(nodo2, "Nodo1") {
+        Component(per1, "Personaje1", "Recibe una petición, la procesa y envía una respuesta")
+        Component(per2, "Personaje2", "Recibe una petición, la procesa y envía una respuesta")
+        Component(perN, "PersonajeN", "Recibe una petición, la procesa y envía una respuesta")
+    }
+}
+
+Rel_D(cliente, partida, "Envía", "petición")
+Rel_U(partida, cliente, "Redirige","petición")
+Rel_D(partida, per1, "Redirige", "petición")
+Rel_D(partida, per2, "Redirige", "petición")
+Rel_D(partida, perN, "Redirige", "petición")
+
+@endumlS

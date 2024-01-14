@@ -1,0 +1,11 @@
+@startuml RPGContextC4
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Person_Ext(cliente, "Cliente", "Quiere buscar una partida disponible.")
+
+System(sistema, "Sistema", "Busca una partida disponible", "Elixir")
+
+Rel_D(cliente, sistema, "Envía", "petición")
+Rel_U(sistema, cliente, "Devuelve", "respuesta")
+
+@enduml

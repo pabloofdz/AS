@@ -1,0 +1,27 @@
+@startuml RPGContainerC4
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Person_Ext(cliente, "Cliente", "Quiere buscar una partida")
+System_Boundary(sistema, "Sistema peer-to-peer") {
+    Container_Boundary(nodo1, "Nodo 1") {
+        Component(peer1, "Partida 1", "")
+    }
+    Container_Boundary(nodo2, "Nodo 2") {
+        Component(peer2, "Partida 2", "")
+    }
+    Container_Boundary(nodo3, "Nodo 3") {
+        Component(peer3, "Partida 3", "")
+    }
+    Container_Boundary(nodo4, "Nodo N") {
+        Component(peer4, "Partida N", "")
+    }
+}
+
+Rel_D(cliente, peer1, "Envía", "petición")
+Rel_U(sistema, cliente, "Devuelve", "respuesta")
+Rel_D(peer1, peer2, "Redirige","petición")
+Rel_L(peer2, peer3, "Redirige","petición")
+Rel_U(peer3, peer4, "Redirige","petición")
+Rel_R(peer4, peer1, "Redirige","petición")
+
+@enduml
